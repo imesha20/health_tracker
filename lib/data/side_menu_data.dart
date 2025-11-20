@@ -8,8 +8,8 @@ class SideMenuData {
     
     ),
      SideMenu(icon: Icons.person, title: "Profile", ),
-     SideMenu(icon:Icons.run_circle, title: "Exercise",),
-     SideMenu(icon: Icons.settings, title: "Settings",),
+     SideMenu(icon:Icons.run_circle, title: "Add Entry",),
+     SideMenu(icon: Icons.settings, title: "View Health Records",),
      SideMenu(icon: Icons.history, title: "History",),
      SideMenu(icon: Icons.logout, title: "Logout",),
   ];
