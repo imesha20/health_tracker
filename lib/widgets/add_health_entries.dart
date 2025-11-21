@@ -1,10 +1,11 @@
 import 'package:fitness_tracker/db_helper/db/db_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_tracker/Models/view_health_records_model.dart';
+import 'package:fitness_tracker/db_helper/db/db_helper.dart';
 
 
 class AddHealthEntries extends StatefulWidget {
-  final HealthRecord? record; // NULL → add mode / NON-NULL → edit mode
+  final Map<String, dynamic>? record;
 
   const AddHealthEntries({super.key, this.record});
 
@@ -25,13 +26,12 @@ class _AddEntryScreenState extends State<AddHealthEntries> {
   void initState() {
     super.initState();
 
-    if (isEditing) {
-      // Load values into text fields
-      selectedDate = DateTime.parse(widget.record!.date);
-      stepsController.text = widget.record!.steps.toString();
-      caloriesController.text = widget.record!.calories.toString();
-      waterController.text = widget.record!.water.toString();
-      sleepController.text = widget.record!.sleep.toString();
+    if (widget.record != null) {
+      stepsController.text = widget.record!["steps"].toString();
+      caloriesController.text = widget.record!["calories"]?.toString() ?? "";
+      waterController.text = widget.record!["water"].toString();
+      sleepController.text = widget.record!["sleep"]?.toString() ?? "";
+      selectedDate = DateTime.parse(widget.record!["date"]);
     }
   }
 
@@ -89,24 +89,25 @@ class _AddEntryScreenState extends State<AddHealthEntries> {
   }
 
   Future<void> saveOrUpdate() async {
-    final record = HealthRecord(
-      id: isEditing ? widget.record!.id : null,
-      date: selectedDate.toString().split(" ")[0],
-      steps: int.tryParse(stepsController.text) ?? 0,
-      calories: int.tryParse(caloriesController.text) ?? 0,
-      water: int.tryParse(waterController.text) ?? 0,
-      sleep: double.tryParse(sleepController.text) ?? 0.0,
-    );
+  final record = HealthRecord(
+    id: isEditing ? widget.record!["id"] : null,
+    date: selectedDate.toString().split(" ")[0],
+    steps: int.tryParse(stepsController.text) ?? 0,
+    calories: int.tryParse(caloriesController.text) ?? 0,
+    water: int.tryParse(waterController.text) ?? 0,
+    sleep: double.tryParse(sleepController.text) ?? 0.0,
+  );
 
-    if (isEditing) {
-      await DBHelper.instance.updateRecord(record);
-    } else {
-      await DBHelper.instance.insertRecord(record);
-    }
-
-    if (!mounted) return;
-    Navigator.pop(context, true); // return "true" to refresh list
+  if (isEditing) {
+    await DBHelper.instance.updateRecord(record); // ✅ FIXED
+  } else {
+    await DBHelper.instance.insertRecord(record); // OK
   }
+
+  if (!mounted) return;
+  Navigator.pop(context, true);
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +131,6 @@ class _AddEntryScreenState extends State<AddHealthEntries> {
             ),
             const SizedBox(height: 6),
 
-            // DATE FIELD
             GestureDetector(
               onTap: pickDate,
               child: Container(
@@ -186,7 +186,6 @@ class _AddEntryScreenState extends State<AddHealthEntries> {
 
             const SizedBox(height: 20),
 
-            // SAVE / UPDATE BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

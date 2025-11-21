@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 
 
 class CustomFAB extends StatelessWidget {
-  const CustomFAB({super.key});
+  const CustomFAB({super.key, required Future<Null> Function() onPressed});
 
   @override
   Widget build(BuildContext context) {

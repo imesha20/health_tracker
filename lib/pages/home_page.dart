@@ -1,7 +1,7 @@
 import 'package:fitness_tracker/utils/responsive.dart';
 import 'package:fitness_tracker/widgets/dashboard.dart';
 import 'package:fitness_tracker/widgets/side_menu.dart';
-import 'package:fitness_tracker/widgets/summary_details.dart';
+
 import 'package:fitness_tracker/widgets/summary_widgets.dart';
 import 'package:flutter/material.dart';
 
