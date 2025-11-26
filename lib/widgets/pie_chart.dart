@@ -1,6 +1,5 @@
 import 'package:fitness_tracker/constant/colors.dart';
 import 'package:fitness_tracker/data/pie_chart_data.dart';
-import 'package:fitness_tracker/widgets/summary_details.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 

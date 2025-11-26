@@ -15,27 +15,26 @@ class HealthRecord {
     required this.sleep,
   });
 
-  // Convert to Map for SQLite
   Map<String, dynamic> toMap() {
-    return {
-      "id": id,
+    final map = <String, dynamic>{
       "date": date,
       "steps": steps,
       "calories": calories,
       "water": water,
       "sleep": sleep,
     };
+    if (id != null) map["id"] = id;
+    return map;
   }
 
-  // Convert from Map to Model
   factory HealthRecord.fromMap(Map<String, dynamic> map) {
     return HealthRecord(
-      id: map["id"],
-      date: map["date"],
-      steps: map["steps"],
-      calories: map["calories"],
-      water: map["water"],
-      sleep: map["sleep"] * 1.0,
+      id: map["id"] as int?,
+      date: map["date"] as String,
+      steps: (map["steps"] ?? 0) as int,
+      calories: (map["calories"] ?? 0) as int,
+      water: (map["water"] ?? 0) as int,
+      sleep: (map["sleep"] == null) ? 0.0 : (map["sleep"] as num).toDouble(),
     );
   }
 }

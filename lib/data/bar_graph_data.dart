@@ -1,6 +1,5 @@
 import 'package:fitness_tracker/Models/bar_graph_model.dart';
 import 'package:fitness_tracker/Models/graph_model.dart';
-import 'package:fl_chart/src/chart/bar_chart/bar_chart_data.dart';
 import 'package:flutter/material.dart';
 
 class BarGraphData {

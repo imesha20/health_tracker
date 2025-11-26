@@ -7,25 +7,21 @@ class HealthDetails {
       icon: "assets/icons/drops.png", 
       value: "230ml", 
       title: "Water Intake"
-      ),
-      HealthActivityModel(
-        icon: "assets/icons/footsteps.png", 
+    ),
+    HealthActivityModel(
+      icon: "assets/icons/footsteps.png", 
       value: "7.8km", 
-      title: "Step Count"),
-
-      HealthActivityModel(
+      title: "Step Count"
+    ),
+    HealthActivityModel(
       icon: "assets/icons/daily-calorie-needs.png", 
       value: "340k", 
       title: "Calories Burned"
-      ),
-      HealthActivityModel(
+    ),
+    HealthActivityModel(
       icon: "assets/icons/sleeping-mask.png", 
       value: "7h4m", 
       title: "Sleep"
-      ),
-
+    ),
   ];
-
-  
-
 }
